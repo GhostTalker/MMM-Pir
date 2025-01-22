@@ -359,6 +359,7 @@ async function moduleReset () {
     await execCMD(`rm -f ${moduleRoot}/*.js`);
     await execCMD(`rm -rf ${moduleRoot}/components`);
   }
+  await execCMD("git config pull.rebase false");
   await execCMD("git reset --hard");
 }
 module.exports.moduleReset = moduleReset;

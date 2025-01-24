@@ -1,6 +1,6 @@
 {
   "name": "MMM-Pir",
-  "version": "2.4.5",
+  "version": "2.4.6",
   "description": "Screen manager",
   "keywords": [
     "magic mirror",
@@ -85,5 +85,5 @@
     ],
     "windowsRebuild": false
   },
-  "rev": "250120"
+  "rev": "250124"
 }

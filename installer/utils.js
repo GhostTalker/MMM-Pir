@@ -126,8 +126,8 @@ async function checkOS () {
     case "Windows_NT":
       sysinfo.type = "Windows";
       sysinfo.arch = os.arch();
-      sysinfo.name = os.release();
-      sysinfo.version = os.version();
+      sysinfo.name = os.version();
+      sysinfo.version = os.release();
       return sysinfo;
     default:
       sysinfo.type = undefined;
@@ -359,6 +359,7 @@ async function moduleReset () {
     await execCMD(`rm -f ${moduleRoot}/*.js`);
     await execCMD(`rm -rf ${moduleRoot}/components`);
   }
+  await execCMD("git config pull.rebase false");
   await execCMD("git reset --hard");
 }
 module.exports.moduleReset = moduleReset;

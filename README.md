@@ -1,5 +1,7 @@
 # MMM-Pir
 
+**This is the clone of the original MagicMirror Module. The author decided to remove it.**
+
 After a configured time without any user interaction the display will turn off and hide all modules for economy mode.
 
 It will wake up with a Pir sensor, Touch screen or crontab

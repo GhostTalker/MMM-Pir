@@ -1,6 +1,6 @@
-# MMM-Pir
-
 **This is the clone of the original MagicMirror Module. The author decided to remove it.**
+
+# MMM-Pir
 
 After a configured time without any user interaction the display will turn off and hide all modules for economy mode.
 

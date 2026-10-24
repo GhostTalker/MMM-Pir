@@ -187,6 +187,13 @@ class PIR {
 
       console.error(`[MMM-Pir] [LIB] [PIR] [GPIOD] ${err}`);
       this.running = false;
+
+      if (err && err.code === "MODULE_NOT_FOUND") {
+        const message = "node-libgpiod is not available. PIR mode 0 requires libgpiod v1 (Raspberry Pi OS Bookworm or older). Please use PIR mode 1 (python/gpiozero) instead.";
+        console.error(`[MMM-Pir] [LIB] [PIR] [GPIOD] ${message}`);
+        return this.callback("PIR_ERROR", message);
+      }
+
       return this.callback("PIR_ERROR", err.message);
     }
 

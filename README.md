@@ -181,6 +181,8 @@ For some displays, the `getvcp` commands cause the display to turn-on. In these 
   * `mode: 0` - use node-libgpiod library
   * `mode: 1` - use python script with gpiozero library
 
+⚠ `mode: 0` requires libgpiod v1 (Raspberry Pi OS Bookworm or older). On newer systems (Raspberry Pi OS Trixie with libgpiod v2), `node-libgpiod` can't be built: use `mode: 1` instead.
+
 * Available triggering modes:
   * `triggerMode: 'LH'` - motion signal is triggered when sensor goes from LOW (0, no-motion) to HIGH (1, motion)
   * `triggerMode: 'H'` - motion signal is triggered whenever the sensor sends a HIGH (1, motion) message

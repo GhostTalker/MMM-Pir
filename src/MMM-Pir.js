@@ -8,6 +8,33 @@
 
 var _logPIR = () => { /* do nothing */ };
 
+/**
+ * Deep-merge the module defaults with the user configuration.
+ *
+ * MagicMirror used to provide `configMerge` as a browser global (<= 2.37).
+ * Since 2.38 the core is an ES module, so that helper is no longer global.
+ * Keeping our own implementation makes the module work with both versions.
+ *
+ * @param {object} target object to merge into (mutated and returned)
+ * @param {...object} sources objects to merge, applied left to right
+ * @returns {object} the merged target
+ */
+var _configMerge = (target, ...sources) => {
+  const isPlainObject = (value) => value?.constructor === Object;
+
+  for (const source of sources) {
+    for (const [key, sourceValue] of Object.entries(source ?? {})) {
+      const targetValue = target[key];
+      if (isPlainObject(targetValue) && isPlainObject(sourceValue)) {
+        target[key] = _configMerge({}, targetValue, sourceValue);
+      } else {
+        target[key] = sourceValue;
+      }
+    }
+  }
+  return target;
+};
+
 Module.register("MMM-Pir", {
   requiresVersion: "2.28.0",
   defaults: {
@@ -85,7 +112,7 @@ Module.register("MMM-Pir", {
       }
     };
 
-    this.config = configMerge({}, this.defaults, this.config);
+    this.config = _configMerge({}, this.defaults, this.config);
 
     this.screenDisplay = new screenDisplayer(this.config.Display, Tools);
     this.screenTouch = new screenTouch(this.config.Touch, Tools);

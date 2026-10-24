@@ -143,8 +143,12 @@ async function electronRebuild () {
   return new Promise((resolve) => {
     utils.electronRebuild((err) => {
       if (err) {
-        utils.error("Error Detected!");
-        process.exit(1);
+        // node-libgpiod is an optional dependency (only used by PIR mode 0) and
+        // can fail to rebuild against libgpiod v2 or recent Electron versions.
+        // Don't abort the whole setup: PIR mode 1 (python/gpiozero) still works.
+        utils.warning("electron-rebuild failed!");
+        utils.warning("node-libgpiod (PIR mode 0) won't be available, use PIR mode 1 instead.");
+        if (err.message) utils.warning(err.message);
       }
       resolve();
     })
